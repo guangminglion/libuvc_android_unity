@@ -168,10 +168,10 @@ public class UVCCameraActivity extends UnityPlayerActivity
                 mUVCCamera.destroy();
                 mUVCCamera = null;
 
-              //  mRenderTexture.release();
-              //  mRenderTexture = null;
+                //  mRenderTexture.release();
+                //  mRenderTexture = null;
 
-              //  mTextureID = -1;
+                //  mTextureID = -1;
                 mConnected = false;
                 mIsPreviewing = false;
             }
@@ -204,7 +204,7 @@ public class UVCCameraActivity extends UnityPlayerActivity
             int i = 0;
             for(Size size : sizes)
             {
-           //     Log("Supported size : " + size.toString() + " found!");
+                //     Log("Supported size : " + size.toString() + " found!");
                 sizesString[i] = size.width + "x" + size.height;
 
                 i++;
@@ -231,7 +231,11 @@ public class UVCCameraActivity extends UnityPlayerActivity
                 {
                     UsbInterface iface = device.getInterface(i);
 
-                    if( iface.getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO )
+                    Log("UsbInterface device [" + device.getDeviceName() + "] found with interface [" + iface.getInterfaceClass() + " !" );
+
+                    if(         iface.getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO
+                            ||  iface.getInterfaceClass() == UsbConstants.USB_CLASS_AUDIO
+                            ||  iface.getInterfaceClass() == UsbConstants.USB_CLASS_MISC)
                     {
                         cameras.add(device);
                         break;
@@ -339,7 +343,7 @@ public class UVCCameraActivity extends UnityPlayerActivity
             {
                 Log( "USB_DEVICE_ATTACHED " +device.getDeviceName());
             }
-       }
+        }
 
 
         @Override
@@ -372,8 +376,8 @@ public class UVCCameraActivity extends UnityPlayerActivity
                             }
                         });
                         if (mRenderTexture != null) {
-                        //    mRenderTexture.release();
-                         //   mRenderTexture = null;
+                            //    mRenderTexture.release();
+                            //   mRenderTexture = null;
                         }
 
                         Log("Connected!");
@@ -397,11 +401,11 @@ public class UVCCameraActivity extends UnityPlayerActivity
                     mUVCCamera.close();
                     if (mRenderTexture  != null)
                     {
-                    //    mRenderTexture .release();
-                    //    mRenderTexture  = null;
+                        //    mRenderTexture .release();
+                        //    mRenderTexture  = null;
                     }
 
-            //        mTextureID = -1;
+                    //        mTextureID = -1;
                     mConnected = false;
                     mIsPreviewing = false;
                 }
